@@ -20,7 +20,7 @@ currently httpupload is not working
 
 4. Run the script
 
-       python bot.py
+       python3 bot.py
 
 5. Set up a cron job to update youtube-dl
 
