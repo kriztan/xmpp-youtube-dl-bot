@@ -3,7 +3,7 @@ AssertPathExists=/home/gdr/ytdl-xmpp
 
 [Service]
 WorkingDirectory=/home/gdr/ytdl-xmpp
-ExecStart=/usr/bin/python /home/gdr/ytdl-xmpp/bot.py
+ExecStart=/usr/bin/python3 /home/gdr/ytdl-xmpp/bot.py
 Restart=always
 PrivateTmp=true
 NoNewPrivileges=true
