@@ -96,8 +96,8 @@ def ytdl_progress_hook(sess, to, tick_cb, progress):
                 'content-type': mime,
                 'delete': settings.delete_after_send,
             })
-    else:
-        text = json.dumps(progress)
+        else:
+            text = json.dumps(progress)
 
 #    message_cb(text=text)
 
@@ -115,8 +115,8 @@ def messageCB(sess, mess):
     logger = YTDLLogger(message_cb=message_cb, tick_cb=tick_cb)
 
     ydl_opts = {
-        'logger': logger,
-        'outtmpl': os.path.join(settings.out_directory, '%(title)s-%(id)s.%(ext)s'),
+    'logger': logger,
+    'outtmpl': os.path.join(settings.out_directory, '%(title)s-%(id)s.%(ext)s'),
         'progress_hooks': [functools.partial(ytdl_progress_hook, real_sess, fromjid, tick_cb)],
     }
     if hasattr(settings, 'ydl_opts'):
@@ -142,7 +142,7 @@ def messageCB(sess, mess):
         })
 
     message_cb(to=fromjid, text='*Finished processing:* ' + body)
-    message_cb(to=fromjid, text='*Download from:* ' + CLOUD_FILE_LINK)
+    message_cb(to=fromjid, text='*Download from:* ' + settings.cloud_file_link)
     importlib.reload(yt_dlp)
 
 def send_url_message(sess, to, url):
@@ -239,7 +239,8 @@ def ping(sess):
 if __name__ == "__main__":
     domain = JID(settings.jid).getDomain()
     cl=Client(domain)
-    cl.connect(proxy=settings.proxy)
+    # cl.connect(proxy=settings.proxy)
+    cl.connect(server=settings.server, use_srv=False, proxy=settings.proxy)
     cl.RegisterHandler('message', messageCB)
     cl.RegisterHandler('iq', iqCB)
     cl.auth(JID(settings.jid).getNode(),settings.password)
@@ -259,6 +260,6 @@ if __name__ == "__main__":
     while 1:
         cl.Process(.1)
 
-    	if datetime.datetime.now() - last_interaction > datetime.timedelta(minutes=1):
-        	ping(cl)
-        	last_interaction = datetime.datetime.now()
+        if datetime.datetime.now() - last_interaction > datetime.timedelta(minutes=1):
+            ping(cl)
+            last_interaction = datetime.datetime.now()
