@@ -8,14 +8,20 @@ password = 'd91IuvpEL1S'
 # http://xmpppy.sourceforge.net/apidocs/xmpp.client.Client-class.html#connect
 proxy = {}
 
+# xmpp server
+server = ('xmpp.domain.com', 5222)
+
 # Where to save downloaded files
 out_directory = '/shared/youtube-dl'
 
-# Send downloaded file by XMPP HTTP Upload 
-send_after_download = True
+# Send downloaded file by XMPP HTTP Upload --> currently not working
+send_after_download = false
 
 # After HTTP Upload is completed, delete the file from local disk
 delete_after_send = True
+
+# add link to download the file from http(s)
+cloud_file_link = 'https://www.domain.com/downloads/'
 
 # Download audio instead of video
 #ydl_opts = {
