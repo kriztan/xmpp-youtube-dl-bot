@@ -96,8 +96,8 @@ def ytdl_progress_hook(sess, to, tick_cb, progress):
                 'content-type': mime,
                 'delete': settings.delete_after_send,
             })
-        else:
-            text = json.dumps(progress)
+    else:
+        text = json.dumps(progress)
 
 #    message_cb(text=text)
 
